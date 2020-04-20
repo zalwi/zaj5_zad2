@@ -3,23 +3,41 @@ import java.util.Scanner;
 class EmployeeOperator {
 
     private int numberOfEmployees;
-    private Employee[] employees = new Employee[2];
+    private Employee[] employees;
 
-    public EmployeeOperator() {
-        employees[0] = new Employee();
-        employees[1] = new Employee();
+    public EmployeeOperator(int numberOfEmployees) {
+        this.numberOfEmployees = numberOfEmployees;
+        employees = new Employee[numberOfEmployees];
     }
 
-    void AddEmployee(int employeeNo){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj imię pracownika: ");
-        String firstName = scanner.nextLine();
-        System.out.println("Podaj nazwisko pracownika: ");
-        String lastName = scanner.nextLine();
-        System.out.println("Podaj wynagrodzenie pracownika (PLN): ");
-        int salary = scanner.nextInt();
+    void AddEmployee(){
+        boolean vacancy = false;
+        for (int i=0; i<employees.length; i++) {
+            if (employees[i] == null) {
+                System.out.println("Nowy pracownik ID:\t" + i);
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Podaj imię pracownika: ");
+                String firstName = scanner.nextLine();
+                System.out.println("Podaj nazwisko pracownika: ");
+                String lastName = scanner.nextLine();
+                System.out.println("Podaj wynagrodzenie pracownika (PLN): ");
+                int salary = scanner.nextInt();
+                employees[i] = new Employee();
+                setEmployee(i,firstName,lastName,salary);
+                vacancy = true;
+                break;
+            }
+        }
+        if(!vacancy) System.out.println("Brak wakatów");
+    }
 
-        setEmployee(employeeNo,firstName,lastName,salary);
+    public Employee getEmployee(int employeeId) {
+        if(employeeId > 0 && employeeId < numberOfEmployees)
+            return employees[employeeId];
+        else{
+            System.err.println("Błędne ID pracownika:\t" + employeeId);
+            return null;
+        }
     }
 
     void showCompanyCost(){
