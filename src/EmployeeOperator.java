@@ -10,20 +10,20 @@ class EmployeeOperator {
         employees = new Employee[numberOfEmployees];
     }
 
-    void AddEmployee(Employee employee){
+    void addEmployee(Employee employee){
         boolean vacancy = false;
         for (int i=0; i<employees.length; i++) {
             if (employees[i] == null) {
                 employees[i] = employee;
                 System.out.println("Dodano nowego pracownika ID: " + i);
                 vacancy = true;
-                break;
+                return;
             }
         }
         if(!vacancy) System.out.println("Brak wakatów");
     }
 
-    Employee GetEmployeeInfo(){
+    Employee createEmployee(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj imię pracownika: ");
         String firstName = scanner.nextLine();
