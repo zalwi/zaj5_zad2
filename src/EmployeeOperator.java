@@ -23,6 +23,14 @@ class EmployeeOperator {
         if(!vacancy) System.out.println("Brak wakatów");
     }
 
+    void addEmployeeById(int employeeId, Employee employee){
+        if(employeeId > 0 && employeeId < numberOfEmployees)
+            employees[employeeId] = employee;
+        else{
+            System.err.println("Błędne ID pracownika:\t" + employeeId);
+        }
+    }
+
     Employee createEmployee(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj imię pracownika: ");
